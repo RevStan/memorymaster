@@ -6,16 +6,16 @@ let cards = ["fa-diamond", "fa-diamond",
              "fa-anchor", "fa-anchor",
              "fa-bolt", "fa-bolt",
              "fa-cube", "fa-cube",
-             "fa-lear", "fa-leaf",
+             "fa-leaf", "fa-leaf",
              "fa-bomb", "fa-bomb",
              "fa-bicycle", "fa-bicycle"
             ];
 
-
+   
 function generateCard(card) {
-  return `<li class="card"><i class="fa ${card}"></i></li>`;
+  return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
-
+  
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -51,7 +51,7 @@ function shuffle(array) {
 
 function initGame() {
   let deck = document.querySelector(".deck");
-  let cardHTML = cards.map(function(card) {
+  let cardHTML = shuffle(cards).map(function(card) {
     return generateCard(card);
   });
   
@@ -60,37 +60,51 @@ function initGame() {
 
 initGame();
 
-
-
-
-
 let openCards = [];
 const allCards = document.querySelectorAll('.card');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
+      
+      // Following prevents double clicking a card
+      // with any of the following classList
     
       if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {        
-        
-          openCards.push(card);
-              card.classList.add('open', 'show');
-        
-        //check if cards match
-        let firstCardType = openCards[0].dataset.card;
-        console.log("firstCardType", firstCardType);
-        
-        
-
-        //if cards don't match go away
+          
+          if (openCards.length > 1) {
+            
+            //bypass card click, prevents more than
+            //two cards open at a time
+            //Except when cards match needs work          
+          } else {
+            openCards.push(card);
+            card.classList.add('open', 'show');
+          }
+          
           if (openCards.length == 2) {
-            setTimeout(function() {
-              openCards.forEach(function(card) {
-                card.classList.remove('open', 'show');
-              });  // turns cards face down
-              openCards = [];  
-            }, 1000); // time delay of 1 sec 
+            
+            if (openCards[0].dataset.card == openCards[1].dataset.card) {
+              // cards match leave faceup
+              openCards[0].classList.add('match');
+              openCards[0].classList.remove('open');
+              openCards[0].classList.remove('show');
+              
+              openCards[1].classList.add('match');
+              openCards[1].classList.remove('open');
+              openCards[1].classList.remove('show');
+              openCards = [];
+            } else {
+              
+              //if cards don't match go away
+              setTimeout(function() {
+                openCards.forEach(function(card) {
+                  card.classList.remove('open', 'show');
+                });  // turns cards face down
+                openCards = [];  
+              }, 1000); // time delay of 1 sec
+            }
           }
       }
   });
