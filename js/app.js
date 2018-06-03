@@ -1,7 +1,20 @@
 /*
  * Create a list that holds all of your cards
  */
+let cards = ["fa-diamond", "fa-diamond",
+             "fa-paper-plane-o", "fa-paper-plane-o",
+             "fa-anchor", "fa-anchor",
+             "fa-bolt", "fa-bolt",
+             "fa-cube", "fa-cube",
+             "fa-lear", "fa-leaf",
+             "fa-bomb", "fa-bomb",
+             "fa-bicycle", "fa-bicycle"
+            ];
 
+
+function generateCard(card) {
+  return `<li class="card"><i class="fa ${card}"></i></li>`;
+}
 
 /*
  * Display the cards on the page
@@ -21,7 +34,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
@@ -37,26 +49,48 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+function initGame() {
+  let deck = document.querySelector(".deck");
+  let cardHTML = cards.map(function(card) {
+    return generateCard(card);
+  });
+  
+  deck.innerHTML = cardHTML.join("");
+}
+
+initGame();
+
+
+
+
+
 let openCards = [];
 const allCards = document.querySelectorAll('.card');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
+    
       if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {        
         
           openCards.push(card);
               card.classList.add('open', 'show');
+        
+        //check if cards match
+        let firstCardType = openCards[0].dataset.card;
+        console.log("firstCardType", firstCardType);
+        
+        
 
+        //if cards don't match go away
           if (openCards.length == 2) {
-            //hide cards later
             setTimeout(function() {
               openCards.forEach(function(card) {
                 card.classList.remove('open', 'show');
-              });
+              });  // turns cards face down
               openCards = [];  
-            }, 1000);
+            }, 1000); // time delay of 1 sec 
           }
       }
   });
