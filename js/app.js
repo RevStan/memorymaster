@@ -1,6 +1,6 @@
 /*
  * Create a list that holds all of your cards
- */
+ */  
 let cards = ["fa-diamond", "fa-diamond",
              "fa-paper-plane-o", "fa-paper-plane-o",
              "fa-anchor", "fa-anchor",
@@ -10,7 +10,6 @@ let cards = ["fa-diamond", "fa-diamond",
              "fa-bomb", "fa-bomb",
              "fa-bicycle", "fa-bicycle"
             ];
-
    
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
@@ -25,7 +24,7 @@ function generateCard(card) {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -36,18 +35,6 @@ function shuffle(array) {
     }
     return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 
 function initGame() {
   let deck = document.querySelector(".deck");
@@ -60,15 +47,26 @@ function initGame() {
 
 initGame();
 
+/*
+ * set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+   
+//################################################################
 let openCards = [];
 const allCards = document.querySelectorAll('.card');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
       
-      // Following prevents double clicking a card
-      // with any of the following classList
-    
+// Following prevents double clicking a card
+// with any of the following classList
       if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {        
@@ -94,9 +92,9 @@ allCards.forEach(function(card) {
               openCards[1].classList.add('match');
               openCards[1].classList.remove('open');
               openCards[1].classList.remove('show');
+             
               openCards = [];
             } else {
-              
               //if cards don't match go away
               setTimeout(function() {
                 openCards.forEach(function(card) {
