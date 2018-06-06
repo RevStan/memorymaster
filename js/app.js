@@ -60,12 +60,7 @@ initGame();
    
 //################################################################
 let moves = 0;
-     
-console.log('TOP OF LOGIC FLOW -- value of moves: ', moves);
-
 let openCards = [];
-
-console.log('length of open Cards, should be 0: ', openCards.length);
 
 const allCards = document.querySelectorAll('.card');
 let moveCounter = document.querySelector('.moves');
@@ -81,9 +76,8 @@ allCards.forEach(function(card) {
           
           if (openCards.length > 1) {
             
-            //bypass card click, prevents more than
-            //two cards open at a time
-            //Except when cards match needs work          
+//bypass card click, prevents more than two cards open at a time
+//Except when cards match needs work          
           } else {
             openCards.push(card);
             card.classList.add('open', 'show');
@@ -102,13 +96,7 @@ allCards.forEach(function(card) {
               openCards[1].classList.remove('show');
              
               openCards = [];
-              
-              
-              
               moves ++;
-              console.log("cards match so increment move counter");
-              console.log(moves);
-                            
               moveCounter.textContent= `Moves: ${moves}`;
             } else {
               //if cards don't match go away
@@ -118,10 +106,10 @@ allCards.forEach(function(card) {
                 });  // turns cards face down
                 openCards = [];  
               }, 1000); // time delay of 1 sec
+              moves ++;
+              moveCounter.textContent= `Moves: ${moves}`;
             }
-            moves ++;
-            moveCounter.textContent= `Moves: ${moves}`;
           }
       }
   });
-});;
+});
