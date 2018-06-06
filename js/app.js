@@ -33,15 +33,9 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-}
-
+} 
 function startGame() {
  loadScreen();
-// ADD OTHER FUNCTIONS AND LOGIC BELOW THIS LINE
- 
-    
-                  
-
 } 
 // END OF startGame function
 
@@ -69,6 +63,13 @@ function incrmCountMoves () {
   moveCounter.textContent= `Moves: ${moves}`; 
 }
 // end of incrmCountMoves function
+function resetGame () {
+  moves = 0;
+  moveCounter.textContent= `Moves: ${moves}`;
+}
+
+
+
 
 startGame();
 
@@ -77,6 +78,7 @@ let openCards = [];
 let moveCounter = document.querySelector('.moves');
 moveCounter.textContent= `Moves: ${moves}`;
 const allCards = document.querySelectorAll('.card');
+const resetButton = document.querySelector('.reset');
    
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -137,5 +139,7 @@ allCards.forEach(function(card) {
           }
       }
 
-  });
-});
+  }); // end of event listener for each card
+  resetButton.addEventListener('click', resetGame);
+}); // end of building allCards.
+
