@@ -1,7 +1,6 @@
-/*
- * Create a list that holds all of your cards
- */  
-let cards = ["fa-ediamond", "fa-diamond",
+// * Create a list that holds all of your cards *
+  
+let cards = ["fa-diamond", "fa-diamond",
              "fa-paper-plane-o", "fa-paper-plane-o",
              "fa-anchor", "fa-anchor",
              "fa-bolt", "fa-bolt",
@@ -36,17 +35,49 @@ function shuffle(array) {
     return array;
 }
 
-function initGame() {
+function startGame() {
+ loadScreen();
+// ADD OTHER FUNCTIONS AND LOGIC BELOW THIS LINE
+ 
+    
+                  
+
+} 
+// END OF startGame function
+
+function loadScreen() {
   let deck = document.querySelector(".deck");
-  let cardHTML = shuffle(cards).map(function(card) {
+  shuffle(cards);
+  let cardHTML = (cards).map(function(card)                                  
+  {
     return generateCard(card);
   });
   
   deck.innerHTML = cardHTML.join("");
+} 
+// end of loadScreen function
+
+// NOT WORKING FOR INIT
+      /*function initCountMoves () {
+        moves = 0;
+        moveCounter.textContent= `Moves: ${moves}`; 
+      }*/
+
+// Called from both MATCH and NO MATCH logic
+function incrmCountMoves () {
+  moves ++;
+  moveCounter.textContent= `Moves: ${moves}`; 
 }
+// end of incrmCountMoves function
 
-initGame();
+startGame();
 
+let moves = 0;
+let openCards = [];
+let moveCounter = document.querySelector('.moves');
+moveCounter.textContent= `Moves: ${moves}`;
+const allCards = document.querySelectorAll('.card');
+   
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -59,15 +90,10 @@ initGame();
  */
    
 //################################################################
-let moves = 0;
-let openCards = [];
-
-const allCards = document.querySelectorAll('.card');
-let moveCounter = document.querySelector('.moves');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
-      
+
 // Following prevents double clicking a card
 // with any of the following classList
       if (!card.classList.contains('open') &&
@@ -76,15 +102,15 @@ allCards.forEach(function(card) {
           
           if (openCards.length > 1) {
             
-//bypass card click, prevents more than two cards open at a time
-//Except when cards match needs work          
+// bypass third card click, prevents clicking more than two cards 
+// Except when cards match needs work          
           } else {
             openCards.push(card);
             card.classList.add('open', 'show');
           }
           
           if (openCards.length == 2) {
-            
+              
             if (openCards[0].dataset.card == openCards[1].dataset.card) {
               // cards match leave faceup
               openCards[0].classList.add('match');
@@ -96,8 +122,8 @@ allCards.forEach(function(card) {
               openCards[1].classList.remove('show');
              
               openCards = [];
-              moves ++;
-              moveCounter.textContent= `Moves: ${moves}`;
+              incrmCountMoves ();
+              
             } else {
               //if cards don't match go away
               setTimeout(function() {
@@ -106,10 +132,10 @@ allCards.forEach(function(card) {
                 });  // turns cards face down
                 openCards = [];  
               }, 1000); // time delay of 1 sec
-              moves ++;
-              moveCounter.textContent= `Moves: ${moves}`;
+              incrmCountMoves ();
             }
           }
       }
+
   });
 });
