@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */  
-let cards = ["fa-diamond", "fa-diamond",
+let cards = ["fa-ediamond", "fa-diamond",
              "fa-paper-plane-o", "fa-paper-plane-o",
              "fa-anchor", "fa-anchor",
              "fa-bolt", "fa-bolt",
@@ -14,7 +14,7 @@ let cards = ["fa-diamond", "fa-diamond",
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
-  
+     
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -59,8 +59,16 @@ initGame();
  */
    
 //################################################################
+let moves = 0;
+     
+console.log('TOP OF LOGIC FLOW -- value of moves: ', moves);
+
 let openCards = [];
+
+console.log('length of open Cards, should be 0: ', openCards.length);
+
 const allCards = document.querySelectorAll('.card');
+let moveCounter = document.querySelector('.moves');
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
@@ -94,6 +102,14 @@ allCards.forEach(function(card) {
               openCards[1].classList.remove('show');
              
               openCards = [];
+              
+              
+              
+              moves ++;
+              console.log("cards match so increment move counter");
+              console.log(moves);
+                            
+              moveCounter.textContent= `Moves: ${moves}`;
             } else {
               //if cards don't match go away
               setTimeout(function() {
@@ -103,7 +119,9 @@ allCards.forEach(function(card) {
                 openCards = [];  
               }, 1000); // time delay of 1 sec
             }
+            moves ++;
+            moveCounter.textContent= `Moves: ${moves}`;
           }
       }
   });
-});
+});;
