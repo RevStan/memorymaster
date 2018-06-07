@@ -9,11 +9,23 @@ let cards = ["fa-diamond", "fa-diamond",
              "fa-bomb", "fa-bomb",
              "fa-bicycle", "fa-bicycle"
             ];
-   
+     
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
-     
+
+function loadScreen() {
+  let deck = document.querySelector(".deck");
+  shuffle(cards);
+  let cardHTML = (cards).map(function(card)                                  
+  {
+    return generateCard(card);
+  });
+  
+  deck.innerHTML = cardHTML.join("");
+} 
+// end of loadScreen function
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -33,29 +45,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-} 
-function startGame() {
- loadScreen();
-} 
-// END OF startGame function
-
-function loadScreen() {
-  let deck = document.querySelector(".deck");
-  shuffle(cards);
-  let cardHTML = (cards).map(function(card)                                  
-  {
-    return generateCard(card);
-  });
-  
-  deck.innerHTML = cardHTML.join("");
-} 
-// end of loadScreen function
-
-// NOT WORKING FOR INIT
-      /*function initCountMoves () {
-        moves = 0;
-        moveCounter.textContent= `Moves: ${moves}`; 
-      }*/
+}
 
 // Called from both MATCH and NO MATCH logic
 function incrmCountMoves () {
@@ -68,17 +58,32 @@ function resetGame () {
   moveCounter.textContent= `Moves: ${moves}`;
 }
 
+// NOT WORKING FOR INIT
+      /*function initCountMoves () {
+        moves = 0;
+        moveCounter.textContent= `Moves: ${moves}`; 
+      }*/
 
+function startGame() {
+  loadScreen();
+  
 
-
-startGame();
+  
+console.log("Leaving the start Game func");
+} 
+// END OF startGame function
 
 let moves = 0;
 let openCards = [];
 let moveCounter = document.querySelector('.moves');
+const resetButton = document.querySelector('.reset');
+
+console.log("Prior to startGame funct");
+startGame();
+console.log("Post to startGame funct");
+
 moveCounter.textContent= `Moves: ${moves}`;
 const allCards = document.querySelectorAll('.card');
-const resetButton = document.querySelector('.reset');
    
 /*
  * set up the event listener for a card. If a card is clicked:
