@@ -64,12 +64,54 @@ function resetGame () {
         moveCounter.textContent= `Moves: ${moves}`; 
       }*/
 
+function flipCards(card) {
+ 
+  if (!card.classList.contains('open') &&
+          !card.classList.contains('show') &&
+          !card.classList.contains('match')) {
+    if (openCards.length > 1) {
+    // bypass third card click, prevent
+    // clicking more than two cards 
+    // Except when cards match needs work          
+    } else {
+        openCards.push(card);
+        card.classList.add('open', 'show');
+    }
+  }
+} // END OF FLIP CARDS FUNCTION
+
+function checkForMatch (card) {
+ 
+  if (openCards[0].dataset.card == openCards[1].dataset.card) {
+                // cards match leave faceup
+    openCards[0].classList.add('match');
+    openCards[0].classList.remove('open', 'show');
+    openCards[1].classList.add('match');
+    openCards[1].classList.remove('open', 'show');
+        
+    openCards = [];
+        
+    incrmCountMoves ();
+//  NEEDS ADDED        incrmMatchedPairs ();
+  } else {
+    notAMatch(card);                  
+  }
+} // END OF CHECK FOR MATCH
+
+function notAMatch () {
+  //if cards don't match go away
+          setTimeout(function() {
+            openCards.forEach(function(card) {
+              card.classList.remove('open', 'show');
+            });  // turns cards face down
+              openCards = [];  
+          }, 1000); // time delay of 1 sec
+            incrmCountMoves ();
+} // END OF NOT A MATCH -- CARDS DO NOT MATCH
+
 function startGame() {
   loadScreen();
-  
 
-  
-console.log("Leaving the start Game func");
 } 
 // END OF startGame function
 
@@ -78,15 +120,12 @@ let openCards = [];
 let moveCounter = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
 
-console.log("Prior to startGame funct");
 startGame();
-console.log("Post to startGame funct");
 
 moveCounter.textContent= `Moves: ${moves}`;
 const allCards = document.querySelectorAll('.card');
    
-/*
- * set up the event listener for a card. If a card is clicked:
+/* set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
@@ -97,54 +136,16 @@ const allCards = document.querySelectorAll('.card');
  */
    
 //################################################################
-
+    
 allCards.forEach(function(card) {
   card.addEventListener('click', function(e) {
-
-// Following prevents double clicking a card
-// with any of the following classList
-      if (!card.classList.contains('open') &&
-          !card.classList.contains('show') &&
-          !card.classList.contains('match')) {        
-          
-          if (openCards.length > 1) {
-            
-// bypass third card click, prevents clicking more than two cards 
-// Except when cards match needs work          
-          } else {
-            openCards.push(card);
-            card.classList.add('open', 'show');
-          }
-          
-          if (openCards.length == 2) {
-              
-            if (openCards[0].dataset.card == openCards[1].dataset.card) {
-              // cards match leave faceup
-              openCards[0].classList.add('match');
-              openCards[0].classList.remove('open');
-              openCards[0].classList.remove('show');
-              
-              openCards[1].classList.add('match');
-              openCards[1].classList.remove('open');
-              openCards[1].classList.remove('show');
-             
-              openCards = [];
-              incrmCountMoves ();
-              
-            } else {
-              //if cards don't match go away
-              setTimeout(function() {
-                openCards.forEach(function(card) {
-                  card.classList.remove('open', 'show');
-                });  // turns cards face down
-                openCards = [];  
-              }, 1000); // time delay of 1 sec
-              incrmCountMoves ();
-            }
-          }
-      }
-
+    
+    flipCards(card);
+    if (openCards.length == 2) {
+      checkForMatch(card);
+      
+      
+     }
   }); // end of event listener for each card
   resetButton.addEventListener('click', resetGame);
-}); // end of building allCards.
-
+}); // end of building allCards..
