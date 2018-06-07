@@ -92,7 +92,8 @@ function checkForMatch (card) {
     openCards = [];
         
     incrmCountMoves ();
-//  NEEDS ADDED        incrmMatchedPairs ();
+    incrmMatchedPairs ();
+    
   } else {
     notAMatch(card);                  
   }
@@ -109,6 +110,13 @@ function notAMatch () {
             incrmCountMoves ();
 } // END OF NOT A MATCH -- CARDS DO NOT MATCH
 
+function incrmMatchedPairs () {
+  matchedPairs ++;
+  if (matchedPairs == 8) {
+  //  endOfGame ();
+  }
+}
+
 function startGame() {
   loadScreen();
 
@@ -116,6 +124,7 @@ function startGame() {
 // END OF startGame function
 
 let moves = 0;
+let matchedPairs = 0;
 let openCards = [];
 let moveCounter = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
@@ -143,9 +152,9 @@ allCards.forEach(function(card) {
     flipCards(card);
     if (openCards.length == 2) {
       checkForMatch(card);
-      
-      
-     }
+    }
   }); // end of event listener for each card
+  
   resetButton.addEventListener('click', resetGame);
-}); // end of building allCards..
+
+}); // end of building allCards.
