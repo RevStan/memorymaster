@@ -17,11 +17,10 @@ function generateCard(card) {
 function loadScreen() {
   let deck = document.querySelector(".deck");
   shuffle(cards);
-  let cardHTML = (cards).map(function(card)                                  
-  {
-    return generateCard(card);
-  });
-  
+  let cardHTML = (cards).map(function(card)
+    {
+      return generateCard(card);
+    });
   deck.innerHTML = cardHTML.join("");
 } 
 // end of loadScreen function
@@ -45,23 +44,43 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-}
+}// Called from both MATCH and NO MATCH logic
 
-// Called from both MATCH and NO MATCH logic
-function incrmCountMoves () {
+function incrmNbrClicks () {
   moves ++;
-  moveCounter.textContent= `Moves: ${moves}`; 
+  nbrClicks.textContent= `Moves: ${moves}`;
+  calcNbrStars ();
+}// end of incrmCountMoves function
+
+function calcNbrStars() {
+  if (moves >= 3) {
+    dsplyStars[2].style.color = 'white';
+  }
+  if (moves >= 4) {
+        dsplyStars[1].style.color = 'white';
+  }
+  if (moves >= 5) {
+    dsplyStars[0].style.color = 'white';
+  }
 }
-// end of incrmCountMoves function
+     
 function resetGame () {
+  
+  console.log('inside reset game');
+  
   moves = 0;
-  moveCounter.textContent= `Moves: ${moves}`;
-}
+  matchedPairs = 0;
+  openCards = [];
+  dsplyStars[0].style.color = 'blue';
+  dsplyStars[1].style.color = 'blue';
+  dsplyStars[2].style.color = 'blue';
+  nbrClicks.textContent= `Moves: ${moves}`;
+}//END OF RESET FUNCTION
 
 // NOT WORKING FOR INIT
       /*function initCountMoves () {
         moves = 0;
-        moveCounter.textContent= `Moves: ${moves}`; 
+        nbrClicks.textContent= `Moves: ${moves}`; 
       }*/
 
 function flipCards(card) {
@@ -91,7 +110,7 @@ function checkForMatch (card) {
         
     openCards = [];
         
-    incrmCountMoves ();
+    incrmNbrClicks ();
     incrmMatchedPairs ();
     
   } else {
@@ -107,8 +126,8 @@ function notAMatch () {
             });  // turns cards face down
               openCards = [];  
           }, 1000); // time delay of 1 sec
-            incrmCountMoves ();
-} // END OF NOT A MATCH -- CARDS DO NOT MATCH
+            incrmNbrClicks ();
+} // END OF NOT A MATCH 
 
 function incrmMatchedPairs () {
   matchedPairs ++;
@@ -119,19 +138,19 @@ function incrmMatchedPairs () {
 
 function startGame() {
   loadScreen();
-
-} 
-// END OF startGame function
-
+} // END OF startGame function
+  
 let moves = 0;
 let matchedPairs = 0;
 let openCards = [];
-let moveCounter = document.querySelector('.moves');
+
+let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
+const dsplyStars = document.querySelectorAll('.fa-star');
 
 startGame();
 
-moveCounter.textContent= `Moves: ${moves}`;
+nbrClicks.textContent= `Moves: ${moves}`;
 const allCards = document.querySelectorAll('.card');
    
 /* set up the event listener for a card. If a card is clicked:
@@ -156,5 +175,4 @@ allCards.forEach(function(card) {
   }); // end of event listener for each card
   
   resetButton.addEventListener('click', resetGame);
-
 }); // end of building allCards.
