@@ -19,7 +19,7 @@ function loadScreen() {
   shuffle(cards);
   let cardHTML = (cards).map(function(card)
     {
-      return generateCard(card);
+    return generateCard(card);
     });
   deck.innerHTML = cardHTML.join("");
 } 
@@ -72,18 +72,11 @@ function resetGame () {
   dsplyStars[0].style.color = 'blue';
   dsplyStars[1].style.color = 'blue';
   dsplyStars[2].style.color = 'blue';
+  /*nbrClicks = document.querySelector('.moves');*/
   nbrClicks.textContent= `Moves: ${moves}`;
-}//END OF RESET FUNCTION
 
-function resetMatchedCards () {
-  console.log();
-  console.log('inside reset Matched Cards');
-  let cardHTML = (cards).map(function(card)
-    {
-      return generateCard(card);
-    });
-  deck.innerHTML = cardHTML.join("");
-}
+  startGame();
+}//END OF RESET FUNCTION
 
 // NOT WORKING FOR INIT
       /*function initCountMoves () {
@@ -108,19 +101,15 @@ function flipCards(card) {
 } // END OF FLIP CARDS FUNCTION
 
 function checkForMatch (card) {
- 
   if (openCards[0].dataset.card == openCards[1].dataset.card) {
                 // cards match leave faceup
     openCards[0].classList.add('match');
     openCards[0].classList.remove('open', 'show');
     openCards[1].classList.add('match');
     openCards[1].classList.remove('open', 'show');
-        
     openCards = [];
-        
     incrmNbrClicks ();
     incrmMatchedPairs ();
-    
   } else {
     notAMatch(card);                  
   }
@@ -128,13 +117,13 @@ function checkForMatch (card) {
 
 function notAMatch () {
   //if cards don't match go away
-          setTimeout(function() {
-            openCards.forEach(function(card) {
-              card.classList.remove('open', 'show');
-            });  // turns cards face down
-              openCards = [];  
-          }, 1000); // time delay of 1 sec
-            incrmNbrClicks ();
+  setTimeout(function() {
+    openCards.forEach(function(card) {
+      card.classList.remove('open', 'show');
+    });  // turns cards face down
+    openCards = [];  
+  }, 1000); // time delay of 1 sec
+  incrmNbrClicks ();
 } // END OF NOT A MATCH 
 
 function incrmMatchedPairs () {
@@ -143,24 +132,35 @@ function incrmMatchedPairs () {
   //  endOfGame ();
   }
 }
-
+  
 function startGame() {
   loadScreen();
-} // END OF startGame function
   
+  nbrClicks.textContent= `Moves: ${moves}`;
+  const allCards = document.querySelectorAll('.card');
+  
+  allCards.forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      flipCards(card);
+      if (openCards.length == 2) {
+        checkForMatch(card);
+      }
+      resetButton.addEventListener('click', function(e){
+        resetGame();
+      });
+    }); // end of event listener for each card
+  }); // end of building allCards.
+} // END OF startGame function
+
 let moves = 0;
 let matchedPairs = 0;
 let openCards = [];
-
 let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
 const dsplyStars = document.querySelectorAll('.fa-star');
 
 startGame();
 
-nbrClicks.textContent= `Moves: ${moves}`;
-const allCards = document.querySelectorAll('.card');
-   
 /* set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
@@ -172,19 +172,4 @@ const allCards = document.querySelectorAll('.card');
  */
    
 //################################################################
-    
-allCards.forEach(function(card) {
-  
-  card.addEventListener('click', function(e) {
-       
-    flipCards(card);
-    if (openCards.length == 2) {
-      checkForMatch(card);
-    }
-    resetButton.addEventListener('click', function(e){
-      resetGame(card);
-    });
-  }); // end of event listener for each card
-    
-  
-}); // end of building allCards.
+
