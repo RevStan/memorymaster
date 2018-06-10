@@ -65,9 +65,7 @@ function calcNbrStars() {
 }
      
 function resetGame () {
-  
-  console.log('inside reset game');
-  
+  //loadScreen();
   moves = 0;
   matchedPairs = 0;
   openCards = [];
@@ -76,6 +74,16 @@ function resetGame () {
   dsplyStars[2].style.color = 'blue';
   nbrClicks.textContent= `Moves: ${moves}`;
 }//END OF RESET FUNCTION
+
+function resetMatchedCards () {
+  console.log();
+  console.log('inside reset Matched Cards');
+  let cardHTML = (cards).map(function(card)
+    {
+      return generateCard(card);
+    });
+  deck.innerHTML = cardHTML.join("");
+}
 
 // NOT WORKING FOR INIT
       /*function initCountMoves () {
@@ -166,13 +174,17 @@ const allCards = document.querySelectorAll('.card');
 //################################################################
     
 allCards.forEach(function(card) {
+  
   card.addEventListener('click', function(e) {
-    
+       
     flipCards(card);
     if (openCards.length == 2) {
       checkForMatch(card);
     }
+    resetButton.addEventListener('click', function(e){
+      resetGame(card);
+    });
   }); // end of event listener for each card
+    
   
-  resetButton.addEventListener('click', resetGame);
 }); // end of building allCards.
