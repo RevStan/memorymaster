@@ -51,29 +51,47 @@ function incrmNbrClicks () {
   nbrClicks.textContent= `Moves: ${moves}`;
   calcNbrStars ();
 }// end of incrmCountMoves function
-
+  
 function calcNbrStars() {
-  if (moves >= 3) {
+  if (moves >= 24) {
+    dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
-  }
-  if (moves >= 4) {
-        dsplyStars[1].style.color = 'white';
-  }
-  if (moves >= 5) {
+    dsplyStars[1].style.color = 'white';
     dsplyStars[0].style.color = 'white';
   }
-}
-     
+  if (moves >= 20) {
+    dsplyStars[2].style.color = 'white';
+    dsplyStars[1].style.color = 'white';
+    dsplyStars[0].style.color = 'white';
+  }
+  if (moves >= 16) {
+        dsplyStars[2].style.color = 'white';
+        dsplyStars[1].style.color = 'white';
+  } 
+  if (moves >= 12) {
+    dsplyStars[2].style.color = 'white';
+  }
+}   
+       
 function resetGame () {
   //loadScreen();
+  clearInterval(clock);
+  clockDsply = document.querySelector('.timer');
+  console.log('value of clock display: ', timer);
+  clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
+  cardClicked = 0;
   moves = 0;
   matchedPairs = 0;
+  seconds = 0;
+  minutes = 0;
+  timer = 0;
   openCards = [];
   dsplyStars[0].style.color = 'blue';
   dsplyStars[1].style.color = 'blue';
   dsplyStars[2].style.color = 'blue';
-  /*nbrClicks = document.querySelector('.moves');*/
   nbrClicks.textContent= `Moves: ${moves}`;
+  clicks = 0;
+  clock = 0;
 
   startGame();
 }//END OF RESET FUNCTION
@@ -85,20 +103,40 @@ function resetGame () {
       }*/
 
 function flipCards(card) {
+  if (clicks === 0) {
+    console.log('INSIDE CLICKED A CARD CALL STARTCLOCK');
+    clock = setInterval(startClock, 1000);
+    clicks ++;
+  }
  
   if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {
     if (openCards.length > 1) {
-    // bypass third card click, prevent
-    // clicking more than two cards 
-    // Except when cards match needs work          
+    // PREVENT clicking more than two cards 
+    // Works except when cards match needs work          
     } else {
         openCards.push(card);
         card.classList.add('open', 'show');
     }
   }
 } // END OF FLIP CARDS FUNCTION
+
+function startClock() {
+  seconds++;
+
+  if (seconds <= 9) {
+    clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
+  } else {
+    clockDsply.textContent = `Min: 0${minutes} Sec: ${seconds}`;
+  }
+
+  if (seconds >= 59) {
+    minutes += 1;
+    // -1 here ensures seconds start at 0 every minute change
+    seconds = -1;
+  }
+}
 
 function checkForMatch (card) {
   if (openCards[0].dataset.card == openCards[1].dataset.card) {
@@ -141,6 +179,10 @@ function startGame() {
   
   allCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
+      if (cardClicked === 0){
+        cardClicked ++;
+        //startClock();
+      }
       flipCards(card);
       if (openCards.length == 2) {
         checkForMatch(card);
@@ -152,12 +194,23 @@ function startGame() {
   }); // end of building allCards.
 } // END OF startGame function
 
+let cardClicked = 0;
 let moves = 0;
 let matchedPairs = 0;
+let seconds = 0;
+let minutes = 0;
+let timer = 0;
+let clicks = 0;
+let clock = 0;
 let openCards = [];
 let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
 const dsplyStars = document.querySelectorAll('.fa-star');
+let clockDsply = document.querySelector('.timer');
+console.log('value of clock display: ', timer);
+clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
+clicks = 0;
+clock = 0;
 
 startGame();
 
@@ -172,4 +225,3 @@ startGame();
  */
    
 //################################################################
-
