@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('https://raw.githubusercontent.com/RevStan/memorymaster/master/img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -29,19 +29,40 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    font-size: 50px;
+    color: #70e;
 }
 
+.timer {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #70e;
+}
+
+.moves {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    color: #70e;
+    font-size: 30px;
+}
+
+.instr {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    color: #70e;
+    font-size: 40px;
+}
 /*
  * Styles for the deck of cards
  */
-
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    width: 560px;
+    min-height: 600px;
+    background: #77f;
+    padding: 28px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -52,9 +73,9 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
+    height: 115px;
+    width: 115px;
+    background: #e44;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -64,21 +85,22 @@ h1 {
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
-
+  
 .deck .card.open {
-    transform: rotateY(0);
+/*    transform: rotateY(0);  */
     background: #02b3e4;
     cursor: default;
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 50px;
 }
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+    color: #000;
+    background: #7e8;
+    font-size: 50px;
 }
 
 /*
@@ -87,8 +109,12 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 550px;
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;   
 }
 
 .score-panel .stars {
@@ -96,6 +122,8 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    color: blue;
+    font-size: 25px;
 }
 
 .score-panel .stars li {
@@ -103,7 +131,12 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
+.score-panel .reset {
+    border-radius: 10px;
     cursor: pointer;
-}
+    float: right;
+    font-family: 'French Script MT', french script mt;
+    font-size: 20px;
+    color: #fff;
+    background-color: #4e0;
+ }
