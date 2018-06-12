@@ -76,8 +76,11 @@ function calcNbrStars() {
        
 function resetGame () {
   clearInterval(clock);
+  for (i=0; i < dsplyStars.length; i++) {
+    dsplyStars[i].style.color = 'blue';
+  }
+  nbrClicks.textContent= `Moves: ${moves}`;
   clockDsply = document.querySelector('.timer');
-  console.log('value of clock display: ', timer);
   clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
   moves = 0;
   matchedPairs = 0;
@@ -87,12 +90,7 @@ function resetGame () {
   clicks = 0;
   clock = 0;
   openCards = [];
-  for (i=0; i < dsplyStars.length; i++) {
-    dsplyStars[i].style.color = 'blue';
-  }
-nbrClicks.textContent= `Moves: ${moves}`;
-
-
+  
   startGame();
 }//END OF RESET FUNCTION
 
@@ -107,13 +105,13 @@ function flipCards(card) {
     clock = setInterval(startClock, 1000);
     clicks ++;
   }
- 
   if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {
     if (openCards.length > 1) {
+    // Indicates THIRD card clicked  
     // PREVENT clicking more than two cards 
-    // Works except when cards match needs work          
+    // Works except when cards match / needs work
     } else {
         openCards.push(card);
         card.classList.add('open', 'show');
@@ -123,19 +121,16 @@ function flipCards(card) {
 
 function startClock() {
   seconds++;
-
   if (seconds <= 9) {
     clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
   } else {
     clockDsply.textContent = `Min: 0${minutes} Sec: ${seconds}`;
   }
-
   if (seconds >= 59) {
     minutes += 1;
-    // -1 here ensures seconds start at 0 every minute change
-    seconds = -1;
+    seconds = 0;
   }
-}
+} // END OF START CLOCK 
 
 function checkForMatch (card) {
   if (openCards[0].dataset.card == openCards[1].dataset.card) {
@@ -166,13 +161,18 @@ function notAMatch () {
 function incrmMatchedPairs () {
   matchedPairs ++;
   if (matchedPairs == 8) {
-  //  endOfGame ();
+    endOfGame ();
   }
-}
-  
+}// END OF INCRM MATCHED PAIRS 
+
+function endOfGame() {
+  //  endOfGame ();
+  //SET MODAL VALUES
+  //CHANGE CSS ON MODAL TO VISIBLE  
+} // END OF  ENDOFGAME
+
 function startGame() {
   loadScreen();
-  
   nbrClicks.textContent= `Moves: ${moves}`;
   const allCards = document.querySelectorAll('.card');
   
@@ -189,6 +189,7 @@ function startGame() {
   }); // end of building allCards.
 } // END OF startGame function
 
+// INITIAL SETTING OF VARIABLES
 let moves = 0;
 let matchedPairs = 0;
 let seconds = 0;
@@ -202,19 +203,5 @@ const resetButton = document.querySelector('.reset');
 const dsplyStars = document.querySelectorAll('.fa-star');
 let clockDsply = document.querySelector('.timer');
 clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
-clicks = 0;
-clock = 0;
 
 startGame();
-
-/* set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-   
-//################################################################
