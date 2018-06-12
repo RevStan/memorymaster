@@ -1,5 +1,4 @@
 // * Create a list that holds all of your cards *
-  
 let cards = ["fa-diamond", "fa-diamond",
              "fa-paper-plane-o", "fa-paper-plane-o",
              "fa-anchor", "fa-anchor",
@@ -24,14 +23,12 @@ function loadScreen() {
   deck.innerHTML = cardHTML.join("");
 } 
 // end of loadScreen function
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -44,14 +41,18 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-}// Called from both MATCH and NO MATCH logic
-
+}
+// Called from both MATCH and NO MATCH logic
+// increments moves only when TWO cards have 
+// been clicked.
 function incrmNbrClicks () {
   moves ++;
   nbrClicks.textContent= `Moves: ${moves}`;
   calcNbrStars ();
 }// end of incrmCountMoves function
-  
+
+/* Changing the value moves is compared to
+will change the difficulty of the game*/
 function calcNbrStars() {
   if (moves >= 24) {
     dsplyStars[3].style.color = 'white';
@@ -60,38 +61,37 @@ function calcNbrStars() {
     dsplyStars[0].style.color = 'white';
   }
   if (moves >= 20) {
+    dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
-    dsplyStars[0].style.color = 'white';
   }
   if (moves >= 16) {
+        dsplyStars[3].style.color = 'white';
         dsplyStars[2].style.color = 'white';
-        dsplyStars[1].style.color = 'white';
   } 
   if (moves >= 12) {
-    dsplyStars[2].style.color = 'white';
+    dsplyStars[3].style.color = 'white';
   }
 }   
        
 function resetGame () {
-  //loadScreen();
   clearInterval(clock);
   clockDsply = document.querySelector('.timer');
   console.log('value of clock display: ', timer);
   clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
-  cardClicked = 0;
   moves = 0;
   matchedPairs = 0;
   seconds = 0;
   minutes = 0;
   timer = 0;
-  openCards = [];
-  dsplyStars[0].style.color = 'blue';
-  dsplyStars[1].style.color = 'blue';
-  dsplyStars[2].style.color = 'blue';
-  nbrClicks.textContent= `Moves: ${moves}`;
   clicks = 0;
   clock = 0;
+  openCards = [];
+  for (i=0; i < dsplyStars.length; i++) {
+    dsplyStars[i].style.color = 'blue';
+  }
+nbrClicks.textContent= `Moves: ${moves}`;
+
 
   startGame();
 }//END OF RESET FUNCTION
@@ -104,7 +104,6 @@ function resetGame () {
 
 function flipCards(card) {
   if (clicks === 0) {
-    console.log('INSIDE CLICKED A CARD CALL STARTCLOCK');
     clock = setInterval(startClock, 1000);
     clicks ++;
   }
@@ -179,10 +178,6 @@ function startGame() {
   
   allCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
-      if (cardClicked === 0){
-        cardClicked ++;
-        //startClock();
-      }
       flipCards(card);
       if (openCards.length == 2) {
         checkForMatch(card);
@@ -194,7 +189,6 @@ function startGame() {
   }); // end of building allCards.
 } // END OF startGame function
 
-let cardClicked = 0;
 let moves = 0;
 let matchedPairs = 0;
 let seconds = 0;
@@ -207,7 +201,6 @@ let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
 const dsplyStars = document.querySelectorAll('.fa-star');
 let clockDsply = document.querySelector('.timer');
-console.log('value of clock display: ', timer);
 clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
 clicks = 0;
 clock = 0;
