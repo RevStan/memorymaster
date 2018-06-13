@@ -76,19 +76,20 @@ function calcNbrStars() {
        
 function resetGame () {
   clearInterval(clock);
+  seconds = 0;
+  minutes = 0;
+  timer = 0;  
+  moves = 0;
+  matchedPairs = 0;
+  clicks = 0;
+  clock = 0;
   for (i=0; i < dsplyStars.length; i++) {
     dsplyStars[i].style.color = 'blue';
   }
   nbrClicks.textContent= `Moves: ${moves}`;
   clockDsply = document.querySelector('.timer');
   clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
-  moves = 0;
-  matchedPairs = 0;
-  seconds = 0;
-  minutes = 0;
-  timer = 0;
-  clicks = 0;
-  clock = 0;
+  
   openCards = [];
   
   startGame();
@@ -166,10 +167,18 @@ function incrmMatchedPairs () {
 }// END OF INCRM MATCHED PAIRS 
 
 function endOfGame() {
-  //  endOfGame ();
-  //SET MODAL VALUES
-  //CHANGE CSS ON MODAL TO VISIBLE  
-} // END OF  ENDOFGAME
+  clearInterval(clock);
+  modal.style.display = 'block';
+  playAgain.addEventListener('click', function(e){
+    modal.style.display = 'none';
+    resetGame();
+  });
+  noThanks.addEventListener('click', function(e){
+    modal.style.display = 'none';
+  });
+} // END OF  ENDOFGAME 
+ 
+
 
 function startGame() {
   loadScreen();
@@ -200,8 +209,23 @@ let clock = 0;
 let openCards = [];
 let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
+const playAgain = document.querySelector('.playAgain');
+const noThanks = document.querySelector('.noThanks');
 const dsplyStars = document.querySelectorAll('.fa-star');
+const modal = document.querySelector('.modal');
 let clockDsply = document.querySelector('.timer');
 clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
 
 startGame();
+
+/* set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+   
+//################################################################
