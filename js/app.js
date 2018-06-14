@@ -23,12 +23,7 @@ function loadScreen() {
   deck.innerHTML = cardHTML.join("");
 } 
 // end of loadScreen function
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -42,11 +37,12 @@ function shuffle(array) {
     }
     return array;
 }
-// Called from both MATCH and NO MATCH logic
-// increments moves only when TWO cards have 
+
+// Increments MOVES only when TWO cards have 
 // been clicked.
 function incrmNbrClicks () {
   moves ++;
+  mdlMoves ++;
   nbrClicks.textContent= `Moves: ${moves}`;
   calcNbrStars ();
 }// end of incrmCountMoves function
@@ -54,6 +50,7 @@ function incrmNbrClicks () {
 /* Changing the value moves is compared to
 will change the difficulty of the game*/
 function calcNbrStars() {
+  
   if (moves >= 24) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
@@ -65,23 +62,28 @@ function calcNbrStars() {
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
   }
-  if (moves >= 16) {
+  if (moves >= 3) {
         dsplyStars[3].style.color = 'white';
         dsplyStars[2].style.color = 'white';
   } 
-  if (moves >= 12) {
+  if (moves >= 2) {
     dsplyStars[3].style.color = 'white';
+    modalStars[3] = '';
   }
-}   
-       
+ }   
+        
 function resetGame () {
   clearInterval(clock);
   seconds = 0;
   minutes = 0;
-  timer = 0;  
+  timer = 0;
+  mdlSeconds = 0;
+  mdlMinutes = 0;
+  mdlTimer = 0;
   moves = 0;
   matchedPairs = 0;
   clicks = 0;
+  mdlMoves = 0;
   clock = 0;
   for (i=0; i < dsplyStars.length; i++) {
     dsplyStars[i].style.color = 'blue';
@@ -121,7 +123,7 @@ function flipCards(card) {
 } // END OF FLIP CARDS FUNCTION
 
 function startClock() {
-  seconds++;
+  seconds ++;
   if (seconds <= 9) {
     clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
   } else {
@@ -131,6 +133,8 @@ function startClock() {
     minutes += 1;
     seconds = 0;
   }
+  mdlSeconds = seconds;
+  mdlMinutes = minutes;
 } // END OF START CLOCK 
 
 function checkForMatch (card) {
@@ -169,6 +173,14 @@ function incrmMatchedPairs () {
 function endOfGame() {
   clearInterval(clock);
   modal.style.display = 'block';
+   
+  mdlNbrClicks.textContent= `You made ${mdlMoves} Moves!`;
+  
+  mdlClockDsply.textContent = `You took 0${mdlMinutes} Minutes and 0${mdlSeconds} seconds!!`;
+  
+    
+  //modalStars.textContent = `Earning you a ${modalStars} rating!`;
+  
   playAgain.addEventListener('click', function(e){
     modal.style.display = 'none';
     resetGame();
@@ -177,7 +189,7 @@ function endOfGame() {
     modal.style.display = 'none';
   });
 } // END OF  ENDOFGAME 
- 
+
 
 
 function startGame() {
@@ -200,32 +212,33 @@ function startGame() {
 
 // INITIAL SETTING OF VARIABLES
 let moves = 0;
-let matchedPairs = 0;
+let matchedPairs = 7;
 let seconds = 0;
 let minutes = 0;
 let timer = 0;
 let clicks = 0;
 let clock = 0;
+  
 let openCards = [];
 let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
-const playAgain = document.querySelector('.playAgain');
-const noThanks = document.querySelector('.noThanks');
 const dsplyStars = document.querySelectorAll('.fa-star');
-const modal = document.querySelector('.modal');
 let clockDsply = document.querySelector('.timer');
 clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
 
-startGame();
 
-/* set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-   
-//################################################################
+const modal = document.querySelector('.modal');
+let mdlClockDsply = document.querySelector('.mdlTimer');
+const playAgain = document.querySelector('.playAgain');
+const noThanks = document.querySelector('.noThanks');
+const modalStars = document.querySelectorAll('.fa-star');  
+
+let mdlSeconds = 0;
+let mdlMinutes = 0;
+let mdlTimer = 0;
+let mdlMoves = 0;
+let mdlNbrClicks = document.querySelector('.mdlMoves');
+
+/*modalClock.textContent = `Min: 0${mdlMinutes} Sec: 0${mdlSeconds}`;*/
+
+startGame();

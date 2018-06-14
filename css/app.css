@@ -28,29 +28,20 @@ body {
     flex-direction: column;
 }
 
-.congrat {
-  font-weight: bold;
-    font-family: 'French Script MT', french script mt;
-    font-size: 30px;
-    color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 h1 {
     font-weight: bold;
     font-family: 'French Script MT', french script mt;
-    font-size: 50px;
+    font-size: 60px;
     color: #70e;
+  margin-bottom: 3px;
 }
 
-.timer {
+.instr {
     font-weight: bold;
     font-family: 'French Script MT', french script mt;
-    font-size: 30px;
     color: #70e;
+    font-size: 40px;
+    margin-bottom: 5px;
 }
 
 .moves {
@@ -60,12 +51,13 @@ h1 {
     font-size: 30px;
 }
 
-.instr {
+.timer {
     font-weight: bold;
     font-family: 'French Script MT', french script mt;
+    font-size: 30px;
     color: #70e;
-    font-size: 40px;
 }
+
 /*
  * Styles for the deck of cards
  */
@@ -152,6 +144,35 @@ h1 {
     background-color: #4e0;
  }
 
+/* 
+    STYLES for MODAL 
+*/
+.congrat {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   margin-top: 25px;
+}
+
+.mdlMoves {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    color: #70e;
+    font-size:30px;
+}
+
+.mdlTimer {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #70e;
+}
+
 .playAgain {
     flex-wrap: wrap;
     flex-direction: row;
@@ -160,7 +181,7 @@ h1 {
     cursor: pointer;
     float: left;
     font-family: 'French Script MT', french script mt;
-    font-size: 20px;
+    font-size: 30px;
     color: #fff;
     background-color: #4e0;
  }
@@ -171,9 +192,9 @@ h1 {
     cursor: pointer;
     float: right;
     font-family: 'French Script MT', french script mt;
-    font-size: 20px;
+    font-size: 30px;
     color: #fff;
-    background-color: #4e0;
+    background-color: #f00;
  }
 
 /* modal styling */
@@ -182,11 +203,11 @@ h1 {
     background-color: #4e0;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    width: 510px; /* Full width */
+    width: 600px; /* Full width */
     max-width: 100%;
-    max-height: 420px;
+    max-height: 440px;
     height: 100%; /* Full height */
-    left: 30%;
+    left: 26%;
     top: 40%;
   border-radius: 10px;
     border: 3px solid #888;
@@ -198,7 +219,7 @@ h1 {
     font-size: 30px;
     color: #70e;
     background-color: #fefefe;
-    margin: 4% auto; /* 15% from the top and centered */
+    margin: 4% auto; 
     top: 40%;  
     padding: 20px;
     border-radius: 10px;
@@ -206,5 +227,20 @@ h1 {
     /*height: 100%;*/
     width: 90%; /* Could be more or less, depending on screen size */
     height: 340px;
-    text-align: center;
+    text-align: left;
+}
+
+.modalStars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    color: blue;
+    font-size: 25px;
+    text-align: left;
+}
+
+.modalStars li {
+    list-style: none;
+    display: inline-block;
 }
