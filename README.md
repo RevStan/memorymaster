@@ -7,11 +7,22 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This is the classic game of matching two cards at a time until all cards have been matched.
 
-To get started, open `js/app.js` and start building out the app's functionality
+Clicking any card in the deck will start the game timer but there isn't a time constraint on playing the game.
+###Take as long as you want!!!
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+###**Pay Close Attention!!** 
+When two cards have been clicked they will remain faceup for 1 second.
+If they **MATCH** they will remain faceup, change background color and cannot be clicked again.
+If they **DO NOT MATCH** the cards will turn facedown or present a blank card.
+
+Once all the **MATCHES HAVE BEEN MADE** the game is over and a scoring block will appear.
+
+You will have the option to either **PLAY AGAIN** which will reset the game, or **NO THANKS** which will exit the game. 
+
+#Have Fun and Concentrate!
+
 
 ## Contributing
 
