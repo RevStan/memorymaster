@@ -10,9 +10,9 @@
 This is the classic game of matching two cards at a time until all cards have been matched.
 
 Clicking any card in the deck will start the game timer but there isn't a time constraint on playing the game.
-###Take as long as you want!!!
+### Take as long as you want!!!
 
-###**Pay Close Attention!!** 
+### **Pay Close Attention!!** 
 When two cards have been clicked they will remain faceup for 1 second.
 If they **MATCH** they will remain faceup, change background color and cannot be clicked again.
 If they **DO NOT MATCH** the cards will turn facedown or present a blank card.
