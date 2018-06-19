@@ -1,4 +1,4 @@
-// * Create a list that holds all of your cards *
+// * Create a list that holds all of your cards *  
 let cards = ["fa-diamond", "fa-diamond",
              "fa-paper-plane-o", "fa-paper-plane-o",
              "fa-anchor", "fa-anchor",
@@ -11,7 +11,7 @@ let cards = ["fa-diamond", "fa-diamond",
      
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
-}
+} // end of generateCard function
 
 function loadScreen() {
   let deck = document.querySelector(".deck");
@@ -21,8 +21,7 @@ function loadScreen() {
     return generateCard(card);
     });
   deck.innerHTML = cardHTML.join("");
-} 
-// end of loadScreen function
+} // end of loadScreen function
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -36,7 +35,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-}
+} // end of Shuffle function
 
 // Increments MOVES only when TWO cards have 
 // been clicked.
@@ -46,32 +45,39 @@ function incrmNbrClicks () {
   nbrClicks.textContent= `Moves: ${moves}`;
   calcNbrStars ();
 }// end of incrmCountMoves function
-
-/* Changing the value moves is compared to
-will change the difficulty of the game*/
-function calcNbrStars() {
   
-  if (moves >= 24) {
+function calcNbrStars() {
+  if (moves >= 32) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
     dsplyStars[0].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
+    modalStars[1].style.display = "none";
+    modalStars[0].style.display = "none";
+  }
+  if (moves >= 26) {
+    dsplyStars[3].style.color = 'white';
+    dsplyStars[2].style.color = 'white';
+    dsplyStars[1].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
+    modalStars[1].style.display = "none";
+    
   }
   if (moves >= 20) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
-    dsplyStars[1].style.color = 'white';
-  }
-  if (moves >= 3) {
-        dsplyStars[3].style.color = 'white';
-        dsplyStars[2].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
   } 
-  if (moves >= 2) {
+  if (moves >= 14) {
     dsplyStars[3].style.color = 'white';
-    modalStars[3] = '';
+    modalStars[3].style.display = 'none';
   }
  }   
-        
+         
 function resetGame () {
   clearInterval(clock);
   seconds = 0;
@@ -88,6 +94,9 @@ function resetGame () {
   for (i=0; i < dsplyStars.length; i++) {
     dsplyStars[i].style.color = 'blue';
   }
+  for (i=0; i < modalStars.length; i++) {
+    modalStars[i].style.display = 'inline-block';
+  }
   nbrClicks.textContent= `Moves: ${moves}`;
   clockDsply = document.querySelector('.timer');
   clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
@@ -96,12 +105,6 @@ function resetGame () {
   
   startGame();
 }//END OF RESET FUNCTION
-
-// NOT WORKING FOR INIT
-      /*function initCountMoves () {
-        moves = 0;
-        nbrClicks.textContent= `Moves: ${moves}`; 
-      }*/
 
 function flipCards(card) {
   if (clicks === 0) {
@@ -162,25 +165,19 @@ function notAMatch () {
   }, 1000); // time delay of 1 sec
   incrmNbrClicks ();
 } // END OF NOT A MATCH 
-
+ 
 function incrmMatchedPairs () {
   matchedPairs ++;
-  if (matchedPairs == 8) {
+  if (matchedPairs === 8) {
     endOfGame ();
   }
 }// END OF INCRM MATCHED PAIRS 
-
+       
 function endOfGame() {
   clearInterval(clock);
   modal.style.display = 'block';
-   
   mdlNbrClicks.textContent= `You made ${mdlMoves} Moves!`;
-  
-  mdlClockDsply.textContent = `You took 0${mdlMinutes} Minutes and 0${mdlSeconds} seconds!!`;
-  
-    
-  //modalStars.textContent = `Earning you a ${modalStars} rating!`;
-  
+  mdlClockDsply.textContent = `You took ${mdlMinutes} Minutes and ${mdlSeconds} seconds!!`;
   playAgain.addEventListener('click', function(e){
     modal.style.display = 'none';
     resetGame();
@@ -188,9 +185,7 @@ function endOfGame() {
   noThanks.addEventListener('click', function(e){
     modal.style.display = 'none';
   });
-} // END OF  ENDOFGAME 
-
-
+} // END OF  ENDOFGAME
 
 function startGame() {
   loadScreen();
@@ -212,7 +207,7 @@ function startGame() {
 
 // INITIAL SETTING OF VARIABLES
 let moves = 0;
-let matchedPairs = 7;
+let matchedPairs = 0;
 let seconds = 0;
 let minutes = 0;
 let timer = 0;
@@ -225,14 +220,12 @@ const resetButton = document.querySelector('.reset');
 const dsplyStars = document.querySelectorAll('.fa-star');
 let clockDsply = document.querySelector('.timer');
 clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
-
-
+ 
 const modal = document.querySelector('.modal');
 let mdlClockDsply = document.querySelector('.mdlTimer');
 const playAgain = document.querySelector('.playAgain');
 const noThanks = document.querySelector('.noThanks');
-const modalStars = document.querySelectorAll('.fa-star');  
-
+const modalStars = document.querySelectorAll('.mdl-star');
 let mdlSeconds = 0;
 let mdlMinutes = 0;
 let mdlTimer = 0;
