@@ -51,7 +51,7 @@ function incrmNbrClicks () {
 will change the difficulty of the game*/
 function calcNbrStars() {
   
-  if (moves >= 24) {
+  if (moves >= 28) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
@@ -61,7 +61,7 @@ function calcNbrStars() {
     modalStars[1].style.display = "none";
     modalStars[0].style.display = "none";
   }
-  if (moves >= 20) {
+  if (moves >= 24) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
@@ -70,13 +70,13 @@ function calcNbrStars() {
     modalStars[1].style.display = "none";
     
   }
-  if (moves >= 8) {
+  if (moves >= 20) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     modalStars[3].style.display = 'none';
     modalStars[2].style.display = 'none';
   } 
-  if (moves >= 4) {
+  if (moves >= 16) {
     dsplyStars[3].style.color = 'white';
     modalStars[3].style.display = 'none';
   }
@@ -92,7 +92,7 @@ function resetGame () {
   mdlMinutes = 0;
   mdlTimer = 0;
   moves = 0;
-  matchedPairs = 7;
+  matchedPairs = 0;
   clicks = 0;
   mdlMoves = 0;
   clock = 0;
@@ -226,7 +226,7 @@ function startGame() {
 
 // INITIAL SETTING OF VARIABLES
 let moves = 0;
-let matchedPairs = 7;
+let matchedPairs = 0;
 let seconds = 0;
 let minutes = 0;
 let timer = 0;
