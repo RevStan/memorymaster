@@ -11,7 +11,7 @@ let cards = ["fa-diamond", "fa-diamond",
      
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
-} // end of generateCard function
+}
 
 function loadScreen() {
   let deck = document.querySelector(".deck");
@@ -21,7 +21,8 @@ function loadScreen() {
     return generateCard(card);
     });
   deck.innerHTML = cardHTML.join("");
-} // end of loadScreen function
+} 
+// end of loadScreen function
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -35,7 +36,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-} // end of Shuffle function
+}
 
 // Increments MOVES only when TWO cards have 
 // been clicked.
@@ -46,8 +47,11 @@ function incrmNbrClicks () {
   calcNbrStars ();
 }// end of incrmCountMoves function
   
+/* Changing the value moves is compared to
+will change the difficulty of the game*/
 function calcNbrStars() {
-  if (moves >= 32) {
+  
+  if (moves >= 24) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
@@ -57,7 +61,7 @@ function calcNbrStars() {
     modalStars[1].style.display = "none";
     modalStars[0].style.display = "none";
   }
-  if (moves >= 26) {
+  if (moves >= 20) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     dsplyStars[1].style.color = 'white';
@@ -66,13 +70,13 @@ function calcNbrStars() {
     modalStars[1].style.display = "none";
     
   }
-  if (moves >= 20) {
+  if (moves >= 8) {
     dsplyStars[3].style.color = 'white';
     dsplyStars[2].style.color = 'white';
     modalStars[3].style.display = 'none';
     modalStars[2].style.display = 'none';
   } 
-  if (moves >= 14) {
+  if (moves >= 4) {
     dsplyStars[3].style.color = 'white';
     modalStars[3].style.display = 'none';
   }
@@ -80,6 +84,7 @@ function calcNbrStars() {
          
 function resetGame () {
   clearInterval(clock);
+  nbrClcks = 0
   seconds = 0;
   minutes = 0;
   timer = 0;
@@ -87,7 +92,7 @@ function resetGame () {
   mdlMinutes = 0;
   mdlTimer = 0;
   moves = 0;
-  matchedPairs = 0;
+  matchedPairs = 7;
   clicks = 0;
   mdlMoves = 0;
   clock = 0;
@@ -106,6 +111,7 @@ function resetGame () {
   startGame();
 }//END OF RESET FUNCTION
 
+
 function flipCards(card) {
   if (clicks === 0) {
     clock = setInterval(startClock, 1000);
@@ -114,10 +120,9 @@ function flipCards(card) {
   if (!card.classList.contains('open') &&
           !card.classList.contains('show') &&
           !card.classList.contains('match')) {
-    if (openCards.length > 1) {
-    // Indicates THIRD card clicked  
-    // PREVENT clicking more than two cards 
-    // Works except when cards match / needs work
+    
+       if (openCards.length > 1) {
+     // prevent 3rd card
     } else {
         openCards.push(card);
         card.classList.add('open', 'show');
@@ -140,9 +145,11 @@ function startClock() {
   mdlMinutes = minutes;
 } // END OF START CLOCK 
 
+
 function checkForMatch (card) {
+ 
   if (openCards[0].dataset.card == openCards[1].dataset.card) {
-                // cards match leave faceup
+  // cards match leave faceup
     openCards[0].classList.add('match');
     openCards[0].classList.remove('open', 'show');
     openCards[1].classList.add('match');
@@ -151,24 +158,28 @@ function checkForMatch (card) {
     incrmNbrClicks ();
     incrmMatchedPairs ();
   } else {
-    notAMatch(card);                  
+    notAMatch(card);
   }
 } // END OF CHECK FOR MATCH
 
 function notAMatch () {
-  //if cards don't match go away
   setTimeout(function() {
     openCards.forEach(function(card) {
       card.classList.remove('open', 'show');
     });  // turns cards face down
-    openCards = [];  
+    openCards = [];
   }, 1000); // time delay of 1 sec
-  incrmNbrClicks ();
+  
+  /*  Prevents the moves counter from being falsely incremented  */
+  if (nbrClcks === 2) {
+    incrmNbrClicks ();
+  }
+   nbrClcks = 0;
 } // END OF NOT A MATCH 
  
 function incrmMatchedPairs () {
   matchedPairs ++;
-  if (matchedPairs === 8) {
+  if (matchedPairs == 8) {
     endOfGame ();
   }
 }// END OF INCRM MATCHED PAIRS 
@@ -185,7 +196,7 @@ function endOfGame() {
   noThanks.addEventListener('click', function(e){
     modal.style.display = 'none';
   });
-} // END OF  ENDOFGAME
+} // END OF  ENDOFGAME 
 
 function startGame() {
   loadScreen();
@@ -194,26 +205,34 @@ function startGame() {
   
   allCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
-      flipCards(card);
+
+/* The nbrClcks variable is used in the Not A Match function
+    to prevent erroneously incrementing the moves counter  
+*/
+      nbrClcks ++;
+ 
+      if (openCards.length <= 1){
+        flipCards(card);
+      }
       if (openCards.length == 2) {
         checkForMatch(card);
       }
-      resetButton.addEventListener('click', function(e){
-        resetGame();
-      });
+        resetButton.addEventListener('click', function(e){
+          resetGame();
+        });
     }); // end of event listener for each card
   }); // end of building allCards.
 } // END OF startGame function
 
 // INITIAL SETTING OF VARIABLES
 let moves = 0;
-let matchedPairs = 0;
+let matchedPairs = 7;
 let seconds = 0;
 let minutes = 0;
 let timer = 0;
 let clicks = 0;
+let nbrClcks = 0 // controls incrementing Moves countr
 let clock = 0;
-  
 let openCards = [];
 let nbrClicks = document.querySelector('.moves');
 const resetButton = document.querySelector('.reset');
@@ -223,15 +242,14 @@ clockDsply.textContent = `Min: 0${minutes} Sec: 0${seconds}`;
  
 const modal = document.querySelector('.modal');
 let mdlClockDsply = document.querySelector('.mdlTimer');
+const modalStars = document.querySelectorAll('.mdl-star');
 const playAgain = document.querySelector('.playAgain');
 const noThanks = document.querySelector('.noThanks');
-const modalStars = document.querySelectorAll('.mdl-star');
+let mdlNbrClicks = document.querySelector('.mdlMoves');
 let mdlSeconds = 0;
 let mdlMinutes = 0;
 let mdlTimer = 0;
 let mdlMoves = 0;
-let mdlNbrClicks = document.querySelector('.mdlMoves');
-
-/*modalClock.textContent = `Min: 0${mdlMinutes} Sec: 0${mdlSeconds}`;*/
 
 startGame();
+ 
