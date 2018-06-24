@@ -198,6 +198,9 @@ function endOfGame() {
   });
 } // END OF  ENDOFGAME 
 
+/*###################################################
+      START GAME FUNCTION BEGINS HERE
+#################################################### */      
 function startGame() {
   loadScreen();
   nbrClicks.textContent= `Moves: ${moves}`;
@@ -252,4 +255,3 @@ let mdlTimer = 0;
 let mdlMoves = 0;
 
 startGame();
- 
