@@ -1,12 +1,4 @@
 <!doctype html>
-<!--  I watched the video with Mike Wales and followed some of his logic in overall basic construction.
-
-Coding order and method are from the mind of Rev. Stan Cline with no intention of copying or using someones code.
-
-Also used Murach's HTML5 AND CSS3 training and reference manual for the media queries to insure correct coding.
-
-Used online MDN reference for Css and JS additional info and usage guides.
--->
 <html lang="en">
   <head>
       <meta charset="utf-8">
@@ -24,7 +16,6 @@ Used online MDN reference for Css and JS additional info and usage guides.
         
       </header>
       <span class=instr> Click on any square to start game!</span>
-      <br>
       <section class="score-panel">
         <ul class="stars">
           <li><i class="fa fa-star"></i></li>
@@ -43,32 +34,29 @@ Used online MDN reference for Css and JS additional info and usage guides.
   </body>
   
 <!--  modal elements  -->
-       <section>
+  <section>
     <div class="modal">
       <span class=congrat>CONGRATULATIONS !!!</span>
       <div class="modal-content">
-        
-          <br>
-          <div class = "box"></div>
-            <span>Your Star Rating:</span>
-            <ul class="modalStars">
-              <li class = "mdl-star"><i class="fa fa-star"></i></li>
-              <li class = "mdl-star"><i class="fa fa-star"></i></li>
-              <li class = "mdl-star"><i class="fa fa-star"></i></li>
-              <li class = "mdl-star"><i class="fa fa-star"></i></li>
-            </ul>
-            
-          <br>
-          <span class="mdlMoves">Number Moves:</span>
-          <br>
-          <span  class="mdlTimer">Time</span>
-          <br><br>
-          <div> 
-            <button class="playAgain">Play Again</button>
-            <button class="noThanks">No Thanks</button>
-          </div>
+        <div class = "box"></div>
+        <span>Your Star Rating:</span>
+        <ul class="modalStars">
+          <li class = "mdl-star"><i class="fa fa-star"></i></li>
+          <li class = "mdl-star"><i class="fa fa-star"></i></li>
+          <li class = "mdl-star"><i class="fa fa-star"></i></li>
+          <li class = "mdl-star"><i class="fa fa-star"></i></li>
+        </ul>
+        <br>
+        <span class="mdlMoves">Number Moves:</span>
+        <br>
+        <span  class="mdlTimer">Time</span>
+        <br><br>
+        <div> 
+          <button class="playAgain">Play Again</button>
+          <button class="noThanks">No Thanks</button>
         </div>
       </div>
+    </div>
   </section> 
 
     <script src="js/app.js"></script>
