@@ -33,7 +33,7 @@ h1 {
     font-family: 'French Script MT', french script mt;
     font-size: 60px;
     color: #70e;
-  margin-bottom: 3px;
+  margin-bottom: 0px;
 }
 
 .instr {
@@ -41,6 +41,7 @@ h1 {
     font-family: 'French Script MT', french script mt;
     color: #70e;
     font-size: 40px;
+    margin-top: -5px;
     margin-bottom: 5px;
 }
 
@@ -62,7 +63,7 @@ h1 {
  * Styles for the deck of cards
  */
 .deck {
-    width: 660px;
+    width: 560px;
     min-height: 600px;
     background: #77f;
     padding: 28px;
@@ -76,8 +77,8 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 115px;
+    width: 115px;
     background: #e44;
     font-size: 0;
     color: #ffffff;
@@ -144,67 +145,11 @@ h1 {
     background-color: #4e0;
  }
 
-/* 
-    STYLES for MODAL 
-*/
-.star-content .box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.congrat {
-    font-weight: bold;
-    font-family: 'AR DELANEY', ar delaney;
-    font-size: 40px;
-    color: #e23;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-   margin-top: 25px;
-}
-
-.mdlMoves {
-    font-weight: bold;
-    font-family: 'French Script MT', french script mt;
-    color: #70e;
-    font-size:30px;
-}
-
-.mdlTimer {
-    font-weight: bold;
-    font-family: 'French Script MT', french script mt;
-    font-size: 30px;
-    color: #70e;
-}
-
-.playAgain {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 10px;
-    cursor: pointer;
-    float: left;
-    font-family: 'French Script MT', french script mt;
-    font-size: 30px;
-    color: #fff;
-    background-color: #4e0;
- }
-
-.noThanks {
-    display: flex;
-    border-radius: 10px;
-    cursor: pointer;
-    float: right;
-    font-family: 'French Script MT', french script mt;
-    font-size: 30px;
-    color: #fff;
-    background-color: #f00;
- }
 
 /********************************************************
                 MODAL STYLING
  *******************************************************/
+
 .modal {
     background-color: #4e0;
     display: none; /* Hidden by default */
@@ -213,7 +158,7 @@ h1 {
     max-width: 100%;
     max-height: 500px;
     height: 100%; /* Full height */
-    left: 26%;
+    left: 10%;
     top: 15%;
     z-index: 100;
     border-radius: 10px;
@@ -235,6 +180,23 @@ h1 {
     width: 90%; /* Could be more or less, depending on screen size */
     height: 340px;
     text-align: left;
+}
+
+.congrat {
+    font-weight: bold;
+    font-family: 'AR DELANEY', ar delaney;
+    font-size: 40px;
+    color: #e23;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   margin-top: 25px;
+}
+
+.star-content .box {
+  display: flex;
+  justify-content: space-between;
 }
 
 .modalStars {
@@ -266,19 +228,59 @@ h1 {
     color: #77e;
 }
 
+.mdlMoves {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    color: #70e;
+    font-size:30px;
+}
+
+.mdlTimer {
+    font-weight: bold;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #70e;
+}
+.playAgain {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 10px;
+    cursor: pointer;
+    float: left;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #fff;
+    background-color: #4e0;
+ }
+
+.noThanks {
+    display: flex;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+    font-family: 'French Script MT', french script mt;
+    font-size: 30px;
+    color: #fff;
+    background-color: #f00;
+ }
+
+
 /**************************************
     STYLES FOR RESPONSIVE DISPLAY 
-***************************************/
+**************************************************
+   Larger devices such as
+   iPad and similar Tablets
+**************************************************/
 
-
-@media only screen and (min-width: 401px) and (max-width: 950px){
+@media only screen and (min-width: 401px) and (max-width: 750px){
     
   h1 {
-    font-size: 30px;
+    font-size: 45px;
   }
   
   .instr {
-    font-size: 25px;
+    font-size: 35px;
   }
   
   .time {
@@ -286,74 +288,11 @@ h1 {
   }
   
   .score-panel {
-    width: 340px;
+    width: 380px;
   }
   
   .score-panel .stars {
     font-size: 20px;
-  }
-  
-  .moves {
-    font-size: 25px;
-  }
-  
-  .timer {
-    font-size: 25px;
-  }
-  
-  .deck{
-        width:  395px;
-        height: 440px;
-        min-height: 440px;
-    }
-
-    .deck .card {
-        width:  75px;
-        height: 75px;
-    }
-  
-    .modal{
-      width: 85%;
-      max-width: 90%;
-      height: 480px;
-      top: 10%;
-      left: 7%;
-    }
-    
-    .modal-content{
-        width:80%;
-        height:70%;
-        top: 10%;
-        left: 15%;
-    }
-  
-    .congrat {
-      font-size: 25px;
-    }
-  
-    .playAgain {
-      font-size: 25px;
-    }
-  
-    .noThanks {
-      font-size: 25px;
-    }
-  
-}
-
-/*  Small Phone Sizing  */
-@media only screen and (max-width: 400px) {
- 
-  h1 {
-    font-size: 30px;
-  } 
-  
-  .instr {
-    font-size: 25px;
-  }
-  
-  .score-panel .stars {
-    font-size: 15px;
   }
   
   .moves {
@@ -365,33 +304,118 @@ h1 {
   }
   
   .score-panel .reset{
-    font-size: 18px;
+    font-size: 20px;
+  }
+  
+  .deck{
+        width:  90%;
+        height: 500px;
+        min-height: 500px;
+  }
+
+  .deck .card {
+        width:  23%;
+        height: 20%;
+  }
+  
+  .modal{
+      width: 90%;
+      height: 60%;
+      max-height: 60%;
+      top: 15%;
+      left: 5%;
+  }
+  
+   .congrat {
+      font-size: 27px;
+      font-weight: normal;
+  }
+    
+  .modal-content{
+        width:85%;
+        height:75%;
+        font-size: 30x;
+        top: 5%;
+        left: 15%;
+  }
+    
+  .modal-stars: {
+    font-size: 20;
+  }
+  
+  .mdlMoves {
+    font-size: 30x;
+  }
+  
+  .mdlTimer {
+    font-size: 30x;
+  }
+  
+  .playAgain {
+    font-size: 25x;
+  }
+  
+  .noThanks {
+    font-size: 25px;
+  }
+}
+
+/**************************************************
+   Midsize devices such as
+   Nexus 4, Galaxy S5, iPhone 6/7/8/10
+**************************************************/
+
+@media only screen and (min-width: 341px) and (max-width: 400px){
+ 
+  h1 {
+    font-size: 25px;
+  } 
+  
+  .instr {
+    font-size: 25px;
+  }
+  
+  .score-panel{
+    width:275px;
+    font-size: 15px;
+  }
+  
+  .score-panel .stars {
+    font-size: 15px;
+  }
+  
+  .moves {
+    font-size: 20px;
+  }
+  
+  .timer {
+    font-size: 20px;
+  }
+  
+  .score-panel .reset{
+    font-size: 15px;
   }
   
   .deck {
     width:  95%;
     min-height: 100%;
-    height: 300px;
+    height: 430px;
     padding: 2px 2px 2px 2px;
   }
 
   .deck .card {
-    width:  21%;
-    height: 50px;
+    width:  75px;
+    height: 75px;
     justify-content: space-around;
     box-shadow: 1px 1px 1px 0 rgba(46, 61, 73, 0.5);
   }
 
-  .score-panel{
-    width:225px;
-    font-size: 15px;
-  }
-  
   .modal{
     width: 90%;
     font-size: 10px;
     top: 1%;
     left: 5%;
+    max-height: 90%;
   }
   
   .congrat{
@@ -400,18 +424,116 @@ h1 {
   
   .modal-content{
     width:90%;
-    height:80%;      
+    height:75%;      
     font-size: 25px;
   }
   
-  .modal-stars{
+  .modalStars{
+    font-size: 20px;
+  }
+  
+  .mdlMoves{
     font-size: 25px;
   }
   
-  .modal-moves{
+  .mdlTimer{
     font-size: 25px;
   }
   
-  .modal-timer{
+  .playAgain {
+    font-size: 22px;
+  }
+  
+  .noThanks {
+    font-size: 22px;
+  }
+}
+
+  
+/**************************************************
+   Small Phone Sizing such as:
+    iPhone 5/se
+**************************************************/
+@media only screen and (min-width: 300px) and (max-width: 340px){
+ 
+  h1 {
+    font-size: 25px;
+  } 
+  
+  .instr {
+    font-size: 20px;
+  }
+  
+  .score-panel .stars {
+    font-size: 12px;
+  }
+  
+  .moves {
+    font-size: 20px;
+  }
+  
+  .timer {
+    font-size: 20px;
+  }
+  
+  .score-panel .reset {
+    font-size: 15px;
+  }
+  
+  .deck {
+    width:  95%;
+    min-height: 100%;
+    height: 350px;
+    padding: 2px 2px 2px 2px;
+  }
+
+  .deck .card {
+    width:  65px;
+    height: 65px;
+    justify-content: space-around;
+    box-shadow: 1px 1px 1px 0 rgba(46, 61, 73, 0.5);
+  }
+
+  .score-panel {
+    width:250px;
+    font-size: 15px;
+  }
+  
+  .modal {
+    width: 90%;
+    font-size: 10px;
+    top: 1%;
+    left: 5%;
+    max-height: 90%;
+  }
+  
+  .congrat {
+    font-size: 20px;
+  }
+  
+  .modal-content {
+    width:90%;
+    height:75%;      
     font-size: 25px;
   }
+  
+  .modalStars {
+    font-size: 20px;
+  }
+  
+  .mdlMoves {
+    font-size: 25px;
+  }
+  
+  .mdlTimer {
+    font-size: 25px;
+  }
+  
+  .playAgain {
+    font-size: 22px;
+  }
+  
+  .noThanks {
+    font-size: 22px;
+  }
+}
