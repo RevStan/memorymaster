@@ -62,7 +62,7 @@ h1 {
  * Styles for the deck of cards
  */
 .deck {
-    width: 560px;
+    width: 660px;
     min-height: 600px;
     background: #77f;
     padding: 28px;
@@ -76,8 +76,8 @@ h1 {
 }
 
 .deck .card {
-    height: 115px;
-    width: 115px;
+    height: 125px;
+    width: 125px;
     background: #e44;
     font-size: 0;
     color: #ffffff;
@@ -269,6 +269,78 @@ h1 {
 /**************************************
     STYLES FOR RESPONSIVE DISPLAY 
 ***************************************/
+
+
+@media only screen and (min-width: 401px) and (max-width: 950px){
+    
+  h1 {
+    font-size: 30px;
+  }
+  
+  .instr {
+    font-size: 25px;
+  }
+  
+  .time {
+    font-size: 25px;
+  }
+  
+  .score-panel {
+    width: 340px;
+  }
+  
+  .score-panel .stars {
+    font-size: 20px;
+  }
+  
+  .moves {
+    font-size: 25px;
+  }
+  
+  .timer {
+    font-size: 25px;
+  }
+  
+  .deck{
+        width:  395px;
+        height: 440px;
+        min-height: 440px;
+    }
+
+    .deck .card {
+        width:  75px;
+        height: 75px;
+    }
+  
+    .modal{
+      width: 85%;
+      max-width: 90%;
+      height: 480px;
+      top: 10%;
+      left: 7%;
+    }
+    
+    .modal-content{
+        width:80%;
+        height:70%;
+        top: 10%;
+        left: 15%;
+    }
+  
+    .congrat {
+      font-size: 25px;
+    }
+  
+    .playAgain {
+      font-size: 25px;
+    }
+  
+    .noThanks {
+      font-size: 25px;
+    }
+  
+}
+
 /*  Small Phone Sizing  */
 @media only screen and (max-width: 400px) {
  
@@ -304,7 +376,7 @@ h1 {
   }
 
   .deck .card {
-    width:  77px;
+    width:  21%;
     height: 50px;
     justify-content: space-around;
     box-shadow: 1px 1px 1px 0 rgba(46, 61, 73, 0.5);
@@ -343,36 +415,3 @@ h1 {
   .modal-timer{
     font-size: 25px;
   }
-
-@media only screen and (min-width: 401px) and (max-width: 950px){
-
-    .deck{
-        width:  380px;
-        height: 100px;
-    }
-
-    .deck .card {
-        width:  75px;
-        height: 75px;
-    }
-
-    .score-panel{
-        width:300px;
-        font-size: 15px;
-    }
-  
-    .modal{
-      width: 25%;
-      height: 100px;
-      top: 10%;
-      left: 10%;
-    }
-    
-    .modal-content{
-        width:25%;
-        height:25%;
-        top: 10%;
-        left: 15%;
-        font-size: 10px;
-    }
-}
