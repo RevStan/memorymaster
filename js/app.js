@@ -38,50 +38,6 @@ function shuffle(array) {
     return array;
 }
 
-// Increments MOVES only when TWO cards have 
-// been clicked.
-function incrmNbrClicks () {
-  moves ++;
-  mdlMoves ++;
-  nbrClicks.textContent= `Moves: ${moves}`;
-  calcNbrStars ();
-}// end of incrmCountMoves function
-  
-/* Changing the value moves is compared to
-will change the difficulty of the game*/
-function calcNbrStars() {
-  
-  if (moves >= 28) {
-    dsplyStars[3].style.color = 'white';
-    dsplyStars[2].style.color = 'white';
-    dsplyStars[1].style.color = 'white';
-    dsplyStars[0].style.color = 'white';
-    modalStars[3].style.display = 'none';
-    modalStars[2].style.display = 'none';
-    modalStars[1].style.display = "none";
-    modalStars[0].style.display = "none";
-  }
-  if (moves >= 24) {
-    dsplyStars[3].style.color = 'white';
-    dsplyStars[2].style.color = 'white';
-    dsplyStars[1].style.color = 'white';
-    modalStars[3].style.display = 'none';
-    modalStars[2].style.display = 'none';
-    modalStars[1].style.display = "none";
-    
-  }
-  if (moves >= 20) {
-    dsplyStars[3].style.color = 'white';
-    dsplyStars[2].style.color = 'white';
-    modalStars[3].style.display = 'none';
-    modalStars[2].style.display = 'none';
-  } 
-  if (moves >= 16) {
-    dsplyStars[3].style.color = 'white';
-    modalStars[3].style.display = 'none';
-  }
- }   
-         
 function resetGame () {
   clearInterval(clock);
   nbrClcks = 0
@@ -144,7 +100,41 @@ function startClock() {
   mdlSeconds = seconds;
   mdlMinutes = minutes;
 } // END OF START CLOCK 
-
+  
+/* Changing the value moves is compared to
+will change the difficulty of the game*/
+function calcNbrStars() {
+  
+  if (moves >= 28) {
+    dsplyStars[3].style.color = 'white';
+    dsplyStars[2].style.color = 'white';
+    dsplyStars[1].style.color = 'white';
+    dsplyStars[0].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
+    modalStars[1].style.display = "none";
+    modalStars[0].style.display = "none";
+  }
+  if (moves >= 24) {
+    dsplyStars[3].style.color = 'white';
+    dsplyStars[2].style.color = 'white';
+    dsplyStars[1].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
+    modalStars[1].style.display = "none";
+    
+  }
+  if (moves >= 20) {
+    dsplyStars[3].style.color = 'white';
+    dsplyStars[2].style.color = 'white';
+    modalStars[3].style.display = 'none';
+    modalStars[2].style.display = 'none';
+  } 
+  if (moves >= 16) {
+    dsplyStars[3].style.color = 'white';
+    modalStars[3].style.display = 'none';
+  }
+ } 
 
 function checkForMatch (card) {
  
@@ -176,7 +166,16 @@ function notAMatch () {
   }
    nbrClcks = 0;
 } // END OF NOT A MATCH 
- 
+
+// Increments MOVES only when TWO cards have 
+// been clicked.
+function incrmNbrClicks () {
+  moves ++;
+  mdlMoves ++;
+  nbrClicks.textContent= `Moves: ${moves}`;
+  calcNbrStars ();
+}// end of incrmCountMoves function
+
 function incrmMatchedPairs () {
   matchedPairs ++;
   if (matchedPairs == 8) {
@@ -218,6 +217,9 @@ function startGame() {
         flipCards(card);
       }
       if (openCards.length == 2) {
+        
+        console.log('Length of all Cards: ', allCards.length);
+         
         checkForMatch(card);
       }
         resetButton.addEventListener('click', function(e){
@@ -255,3 +257,4 @@ let mdlTimer = 0;
 let mdlMoves = 0;
 
 startGame();
+ 
