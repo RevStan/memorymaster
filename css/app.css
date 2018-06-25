@@ -68,7 +68,7 @@ h1 {
     background: #77f;
     padding: 28px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 12px 15px 20px 0 #888; 
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -87,7 +87,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 5px 2px 20px 0 #888;
 }
   
 .deck .card.open {
@@ -270,7 +270,7 @@ h1 {
     STYLES FOR RESPONSIVE DISPLAY 
 **************************************************
    Larger devices such as
-   iPad and similar Tablets
+   Pixel 2 and Pixel 2/XL
 **************************************************/
 
 @media only screen and (min-width: 401px) and (max-width: 750px){
@@ -311,11 +311,28 @@ h1 {
         width:  90%;
         height: 500px;
         min-height: 500px;
+        background-color: #bf9;
   }
 
   .deck .card {
         width:  23%;
         height: 20%;
+        background-color: #936;
+  }
+  
+  .deck .card.open {
+    background-color: #99f;
+  }
+  
+  .deck .card.show {
+    font-size: 35px;
+    background-color: #fb4;
+    color: #000;
+  }
+  
+  .deck .card.match {
+    background-color: #669;
+    color: #fff;
   }
   
   .modal{
@@ -401,15 +418,32 @@ h1 {
     min-height: 100%;
     height: 430px;
     padding: 2px 2px 2px 2px;
+    background-color: #04c;
   }
 
   .deck .card {
     width:  75px;
     height: 75px;
+    background-color: #6f3;
     justify-content: space-around;
-    box-shadow: 1px 1px 1px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 1px 1px 1px 0 #888;
   }
 
+  .deck .card.open {
+    background-color: #ff8;
+  }
+  
+  .deck .card.show {
+    font-size: 35px;
+    color: #000;
+  } 
+    
+  .deck .card.match {
+    background-color: #f3c;
+    font-size: 30px;
+    font-color: #009;
+  }
+  
   .modal{
     width: 90%;
     font-size: 10px;
@@ -490,10 +524,16 @@ h1 {
   .deck .card {
     width:  65px;
     height: 65px;
+    background-color: #cc0;
     justify-content: space-around;
-    box-shadow: 1px 1px 1px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 1px 1px 1px 0 #888;
   }
 
+  .deck .card.show {
+    font-size: 30px;
+    font-color: #000;
+  }
+  
   .score-panel {
     width:250px;
     font-size: 15px;
